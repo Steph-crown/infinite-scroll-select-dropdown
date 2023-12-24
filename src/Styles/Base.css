@@ -2,7 +2,7 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 box-border transition-all ease-in font-MSMediumRegular;
+    @apply p-0 m-0 box-border transition-all ease-in;
     transition: 0.2s ease-in;
   }
 
@@ -11,14 +11,18 @@
   }
 
   .p {
-    @apply text-lg text-fg/80-light dark:text-fg/80-dark mt-8 mb-10 leading-[160%];
+    @apply font-ModeratRegular text-[#ffffffcc] text-base xss:text-lg max-w-[750px] leading-[1.4rem];
   }
 
   .h1 {
-    @apply font-MSMediumWide text-fg/100-light dark:text-fg/100-dark text-2xl xs:text-[32px] md:text-5xl !leading-[140%] xs:!leading-[160%];
+    @apply font-Unigeo64Bold text-white font-[700] text-[1.6rem] xss:text-[2.5rem] leading-[130%] mb-7;
   }
 
   .h1-alt {
     @apply font-MSMediumWide text-fg/50-light dark:text-fg/50-dark;
+  }
+
+  .wrapper {
+    @apply px-8 sm:px-12 md:px-24 max-w-screen-2xl mx-auto;
   }
 }

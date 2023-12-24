@@ -5,60 +5,18 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        MSMedium: ['MSMedium', 'sans-serif'],
-        MSMediumWide: ['MSMediumWide', 'sans-serif'],
-        MSMediumRegular: ['MSMediumRegular', 'sans-serif'],
-        MSMediumItalic: ['MSMediumItalic', 'monospace'],
-        MSXenonMediumItalic: ['MSXenonMediumItalic', 'monospace'],
+        Unigeo64Bold: ['Unigeo64Bold', 'sans-serif'],
+        ModeratMedium: ['ModeratMedium', 'sans-serif'],
+        ModeratBold: ['ModeratBold', 'sans-serif'],
+        ModeratRegular: ['ModeratRegular', 'sans-serif'],
       },
       colors: {
-        'bg/5': {
-          dark: 'rgba(255, 255, 255, 0.05)',
-          light: 'rgba(0, 0, 0, 0.05)',
-        },
-        'bg/100': {
-          dark: '#161616',
-          light: '#FFFFFF',
-        },
-        'navbg/100': {
-          dark: '#181818',
-          light: '#F7F7F5',
-        },
-        navborder: {
-          dark: '#282828',
-          light: '#E6E6E3',
-        },
-        'fg/100': {
-          dark: '#FFFFFF',
-          light: '#161616',
-        },
-        'fg/80': {
-          dark: 'rgba(255, 255, 255, 0.80)',
-          light: 'rgba(0, 0, 0, 0.80)',
-        },
-        'fg/70': {
-          dark: 'rgba(255, 255, 255, 0.70)',
-          light: 'rgba(0, 0, 0, 0.70)',
-        },
-        'fg/60': {
-          dark: 'rgba(255, 255, 255, 0.60)',
-          light: 'rgba(0, 0, 0, 0.60)',
-        },
-        'fg/50': {
-          dark: 'rgba(255, 255, 255, 0.50)',
-          light: 'rgba(0, 0, 0, 0.50)',
-        },
-        'fg/40': {
-          dark: 'rgba(255, 255, 255, 0.40)',
-          light: 'rgba(0, 0, 0, 0.40)',
-        },
-        'fg/20': {
-          dark: 'rgba(255, 255, 255, 0.20)',
-          light: 'rgba(0, 0, 0, 0.20)',
-        },
+        black: '#050F0F',
+        white: '#FFFFFF',
       },
       screens: {
-        xs: '300px',
+        xs: '350px',
+        xss: '400px',
       },
     },
   },

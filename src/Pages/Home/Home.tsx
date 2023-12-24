@@ -1,7 +1,12 @@
+import { Banner } from 'Components'
+
 const Home = () => {
   return (
     <div className=' justify-between flex w-full'>
-      <h1 className='text-red-700'>Coming soon</h1>
+      <Banner
+        headerText='Your Home Away from Home'
+        subtext='Find your ideal living space among our serviced and shared apartments. Comfortable, fully-equipped spaces designed for a vibrant communal lifestyle.'
+      />
     </div>
   )
 }

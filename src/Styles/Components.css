@@ -1,94 +1,11 @@
 @tailwind components;
 
 @layer components {
-  .border-nav {
-    @apply border-solid border-navborder-light dark:border-navborder-dark;
-  }
-
-  .side-nav {
-    @apply flex items-center gap-2 px-4 py-3 rounded-lg;
-  }
-
   .btn {
-    @apply px-8 py-4 rounded-lg text-fg/70-light dark:text-fg/70-dark flex items-center justify-center gap-2 bg-bg/5-light dark:bg-bg/5-dark border-bg/5-light dark:border-bg/5-dark border-solid border-[1px] text-sm;
+    @apply outline-none px-8 py-4 rounded-md font-ModeratMedium;
   }
 
-  /* ImageHoverSwitch */
-  /* Define the styles for the black and white and colored images */
-  .bw {
-    filter: grayscale(100%);
-    transition: filter 0.5s ease;
-    animation: fadeOut 1s ease forwards;
-  }
-
-  .colored {
-    filter: grayscale(0%);
-    animation: fadeIn 1s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      filter: grayscale(100%);
-    }
-    to {
-      filter: grayscale(0%);
-    }
-  }
-
-  @keyframes fadeOut {
-    from {
-      filter: grayscale(0%);
-    }
-    to {
-      filter: grayscale(100%);
-    }
-  }
-
-  /* Mobile menu. */
-  .mobile-menu-open div:nth-child(3) {
-    @apply w-0;
-  }
-
-  .mobile-menu-open div:nth-child(2) {
-    @apply translate-y-0 xs:translate-y-0 rotate-45;
-  }
-
-  .mobile-menu-open div:nth-child(1) {
-    @apply translate-y-[7px] xs:translate-y-2.5 -rotate-45;
-  }
-
-  .mobile-menu {
-    @apply fixed z-[100] right-0 top-[93px] translate-x-[100vw];
-  }
-
-  .mobile-menu.open {
-    @apply translate-x-0;
-  }
-
-  /* tooltip. */
-  .tooltip {
-    @apply relative;
-  }
-
-  .tooltip .tooltip-content {
-    @apply hidden;
-  }
-
-  .tooltip:hover .tooltip-content {
-    @apply block w-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-[rgba(0,0,0,0.6)] text-fg/80-dark text-[15px] p-4 rounded-lg;
-  }
-
-  /* form */
-  .form {
-    @apply flex flex-col gap-6 md:gap-10 max-w-3xl;
-  }
-
-  /* form label */
-  .label {
-    @apply text-fg/70-light dark:text-fg/70-dark text-sm w-full block;
-  }
-
-  .input {
-    @apply w-full px-4 py-4 rounded-lg border-solid border-[1px] border-bg/5-light dark:border-bg/5-dark bg-bg/5-light dark:bg-bg/5-dark text-fg/70-light dark:text-fg/70-dark block mt-2 outline-none font-MSMediumWide;
+  .btn-filled {
+    @apply bg-white text-black;
   }
 }

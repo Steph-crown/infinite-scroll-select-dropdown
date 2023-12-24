@@ -22,3 +22,23 @@
   font-family: 'MSXenonMediumItalic';
   src: url('./../Assets/Fonts/MonaspaceXenon-MediumItalic.otf');
 } */
+
+@font-face {
+  font-family: 'Unigeo64Bold';
+  src: url('./../Assets/Fonts/Unigeo64Bold.ttf');
+}
+
+@font-face {
+  font-family: 'ModeratMedium';
+  src: url('./../Assets/Fonts/Moderat-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'ModeratRegular';
+  src: url('./../Assets/Fonts/Moderat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'ModeratBold';
+  src: url('./../Assets/Fonts/Moderat-Bold.ttf');
+}

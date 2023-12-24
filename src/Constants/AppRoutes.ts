@@ -3,14 +3,6 @@
  */
 const APP_ROUTES = {
   Home: '/',
-  Projects: '/projects',
-  Articles: '/articles',
-  Courses: '/courses',
-  Tools: '/tools',
-  Socials: '/socials',
-  Resume: '/resume',
-  Credits: '/credits',
-  Contact: '/contact',
 }
 
 export default APP_ROUTES
