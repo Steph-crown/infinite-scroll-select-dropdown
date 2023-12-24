@@ -1,3 +1,6 @@
+import 'aos/dist/aos.css'
+
+import AOS from 'aos'
 import RoutesSwitches from 'Routes/Routes'
 
 function App() {
@@ -5,3 +8,5 @@ function App() {
 }
 
 export default App
+
+AOS.init()
