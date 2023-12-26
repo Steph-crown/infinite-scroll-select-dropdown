@@ -1,1 +1,1 @@
-export { ReactComponent as HBXLogoWithText } from './HBXLogoWithText.svg'
+export { default as GreaterThanIcon } from './GreaterThanIcon'

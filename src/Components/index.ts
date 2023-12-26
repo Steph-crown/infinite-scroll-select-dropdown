@@ -1,5 +1,2 @@
 export { default as Loader } from './Loader/Loader'
-export { default as Banner } from './Banner/Banner'
-export { default as Navbar } from './Navbar/Navbar'
-export { default as Logo } from './Logo/Logo'
-export { default as GuestUserNavigation } from './GuestUserNavigation/GuestUserNavigation'
+export { default as Select } from './Select/Select'
