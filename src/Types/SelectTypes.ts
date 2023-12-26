@@ -8,4 +8,6 @@ export type SelectProps = {
   selected?: SelectOptionProps // the selected option.
   handleSelect: (option: SelectOptionProps) => void // function that is called when an option is selected.
   placeholder?: string
+  isFetchingOptions?: boolean
+  lastOptionRef?: (node: Element | null) => void
 }

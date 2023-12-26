@@ -2,9 +2,17 @@ import { FC, useState } from 'react'
 import { SelectOptionProps, SelectProps } from 'Types/SelectTypes'
 
 import { GreaterThanIcon } from 'Assets/Svgs'
+import { Loader } from 'Components'
 import { useListenForOutsideClicks } from 'Hooks'
 
-const Select: FC<SelectProps> = ({ options, selected = { label: '', value: '' }, placeholder = 'Select', handleSelect }) => {
+const Select: FC<SelectProps> = ({
+  options,
+  isFetchingOptions,
+  lastOptionRef,
+  selected = { label: '', value: '' },
+  placeholder = 'Select',
+  handleSelect,
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const openDropdown = () => {
@@ -35,38 +43,47 @@ const Select: FC<SelectProps> = ({ options, selected = { label: '', value: '' },
 
   const { elementRef } = useListenForOutsideClicks(closeDropdown)
 
-  const renderOptions = (options: SelectOptionProps[]) => {
-    return options?.length > 0 ? (
-      options?.map((option, index) => {
-        const isSelected = selected?.value === option.value
+  const renderNoOptions = () => {
+    if (isFetchingOptions) return <Loader />
 
-        return (
-          <button
-            type='button'
-            key={String(option.value) + String(index)}
-            className={optionClassName(option, index, selected?.value === option.value)}
-            onClick={() => {
-              handleSelect(option)
-              closeDropdown()
-            }}
-          >
-            <span
-              title={option.label}
-              className={`${
-                isSelected ? 'font-semibold ' : 'font-normal'
-              } block truncate text-text-tertiary text-[0.625rem] cursor-pointer leading-[0.8rem] text-shades/black font-normal`}
-            >
-              {option.label}
-            </span>
-          </button>
-        )
-      })
-    ) : (
+    return (
       <div className='relative cursor-default select-none py-2 pl-3 pr-9'>
         <span className='font-normal block truncate text-sm text-text-tertiary'>No options here</span>
       </div>
     )
   }
+
+  const renderOptions = (options: SelectOptionProps[]) => {
+    return options?.length > 0
+      ? options?.map((option, index) => {
+          const isSelected = selected?.value === option.value
+
+          return (
+            <button
+              type='button'
+              key={String(option.value) + String(index)}
+              className={optionClassName(option, index, selected?.value === option.value)}
+              onClick={() => {
+                handleSelect(option)
+                closeDropdown()
+              }}
+              ref={options?.length - 2 === index ? lastOptionRef : null}
+            >
+              <span
+                title={option.label}
+                className={`${
+                  isSelected ? 'font-semibold ' : 'font-normal'
+                } block truncate text-text-tertiary text-[0.625rem] cursor-pointer leading-[0.8rem] text-shades/black font-normal`}
+              >
+                {option.label}
+              </span>
+            </button>
+          )
+        })
+      : renderNoOptions()
+  }
+
+  console.log({ lastOptionRef })
 
   return (
     <div className='relative grow'>
@@ -88,6 +105,8 @@ const Select: FC<SelectProps> = ({ options, selected = { label: '', value: '' },
           ref={elementRef}
         >
           {renderOptions(options)}
+
+          {isFetchingOptions && <Loader />}
         </div>
       )}
     </div>
