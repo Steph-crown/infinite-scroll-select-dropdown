@@ -16,6 +16,7 @@ function App() {
   const [debouncedSearchInput, setDebouncedSearchInput] = useState('')
 
   const handleSelect = (option: SelectOptionProps) => {
+    setSearchInput(option?.label)
     setSelectedOption(option)
   }
 

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { SelectOptionProps, SelectProps } from 'Types/SelectTypes'
 
 import { GreaterThanIcon } from 'Assets/Svgs'
@@ -17,7 +17,6 @@ const Select: FC<SelectProps> = ({
   setSearchInput,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [localSearchValue, setLocalSearchValue] = useState('')
 
   const openDropdown = () => {
     setIsDropdownOpen(true)
@@ -69,7 +68,6 @@ const Select: FC<SelectProps> = ({
               className={optionClassName(option, index, selected?.value === option.value)}
               onClick={() => {
                 handleSelect(option)
-                setLocalSearchValue(option.label)
                 closeDropdown()
               }}
               ref={options?.length - 1 === index ? lastOptionRef : null}
@@ -88,10 +86,6 @@ const Select: FC<SelectProps> = ({
       : renderNoOptions()
   }
 
-  useEffect(() => {
-    setLocalSearchValue(searchInput ?? '')
-  }, [searchInput])
-
   return (
     <div className='relative grow'>
       <button onClick={openDropdown} className={containerClassName()}>
@@ -103,7 +97,7 @@ const Select: FC<SelectProps> = ({
               setSearchInput?.(ev.target.value)
             }}
             placeholder={placeholder}
-            value={localSearchValue}
+            value={searchInput}
           />
         ) : (
           <span title={selected?.label} className={labelClassName()}>
