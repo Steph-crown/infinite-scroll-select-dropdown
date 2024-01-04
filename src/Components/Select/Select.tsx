@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { SelectOptionProps, SelectProps } from 'Types/SelectTypes'
 
 import { GreaterThanIcon } from 'Assets/Svgs'
@@ -9,11 +9,15 @@ const Select: FC<SelectProps> = ({
   options,
   isFetchingOptions,
   lastOptionRef,
+  isSearchable,
+  searchInput,
   selected = { label: '', value: '' },
   placeholder = 'Select',
   handleSelect,
+  setSearchInput,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [localSearchValue, setLocalSearchValue] = useState('')
 
   const openDropdown = () => {
     setIsDropdownOpen(true)
@@ -65,9 +69,10 @@ const Select: FC<SelectProps> = ({
               className={optionClassName(option, index, selected?.value === option.value)}
               onClick={() => {
                 handleSelect(option)
+                setLocalSearchValue(option.label)
                 closeDropdown()
               }}
-              ref={options?.length - 2 === index ? lastOptionRef : null}
+              ref={options?.length - 1 === index ? lastOptionRef : null}
             >
               <span
                 title={option.label}
@@ -83,14 +88,28 @@ const Select: FC<SelectProps> = ({
       : renderNoOptions()
   }
 
-  console.log({ lastOptionRef })
+  useEffect(() => {
+    setLocalSearchValue(searchInput ?? '')
+  }, [searchInput])
 
   return (
     <div className='relative grow'>
       <button onClick={openDropdown} className={containerClassName()}>
-        <span title={selected?.label} className={labelClassName()}>
-          {selected?.label || placeholder}
-        </span>
+        {isSearchable ? (
+          <input
+            type='text'
+            className='block text-text-tertiary w-full outline-none'
+            onChange={(ev) => {
+              setSearchInput?.(ev.target.value)
+            }}
+            placeholder={placeholder}
+            value={localSearchValue}
+          />
+        ) : (
+          <span title={selected?.label} className={labelClassName()}>
+            {selected?.label || placeholder}
+          </span>
+        )}
         <span className='pointer-events-none ml-3 flex items-center'>
           <GreaterThanIcon className='rotate-90 text-[#96989A]' />
         </span>
@@ -106,7 +125,7 @@ const Select: FC<SelectProps> = ({
         >
           {renderOptions(options)}
 
-          {isFetchingOptions && <Loader />}
+          {isFetchingOptions && options?.length > 0 && <Loader />}
         </div>
       )}
     </div>

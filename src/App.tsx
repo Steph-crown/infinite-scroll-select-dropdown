@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 
 import { Select } from 'Components'
@@ -11,6 +12,8 @@ function App() {
   const [productOptions, setProductOptions] = useState<SelectOptionProps[]>([])
   const [isFetchingProducts, setIsFetchingProducts] = useState(true)
   const [totalItems, setTotalItems] = useState(0)
+  const [searchInput, setSearchInput] = useState('')
+  const [debouncedSearchInput, setDebouncedSearchInput] = useState('')
 
   const handleSelect = (option: SelectOptionProps) => {
     setSelectedOption(option)
@@ -21,7 +24,7 @@ function App() {
 
     return products?.map((product) => {
       return {
-        label: product?.title,
+        label: `${product?.title}`,
         value: product?.id,
       }
     })
@@ -40,13 +43,33 @@ function App() {
     return (page - 1) * LIMIT
   }
 
-  console.log({ length: productOptions?.length, skiper: getSkipValue() })
+  const getApiUrl = () => {
+    if (debouncedSearchInput) {
+      return `https://dummyjson.com/products/search?q=${debouncedSearchInput}&limit=${LIMIT}&skip=${getSkipValue()}`
+    } else {
+      return `https://dummyjson.com/products?limit=${LIMIT}&skip=${getSkipValue()}`
+    }
+  }
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setProductOptions([])
+      setPage(1)
+      setDebouncedSearchInput(searchInput)
+    }, 500) // delay fetching by 500ms
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [searchInput])
 
   const fetchAndSetProducts = async () => {
     try {
       setIsFetchingProducts(true)
-      const response = await fetch(`https://dummyjson.com/products?limit=${LIMIT}&skip=${getSkipValue()}`)
+      const response = await fetch(getApiUrl())
       const data = await response.json()
+
+      if (page === 1) setProductOptions([])
 
       setProductOptions((prev) => [...prev, ...transformProductToSelectOptions(data?.products)])
       setTotalItems(data?.total)
@@ -60,9 +83,7 @@ function App() {
 
   useEffect(() => {
     fetchAndSetProducts()
-  }, [page])
-
-  console.log({ page })
+  }, [page, debouncedSearchInput])
 
   return (
     <div className='p-20'>
@@ -75,6 +96,9 @@ function App() {
           handleSelect={handleSelect}
           isFetchingOptions={isFetchingProducts}
           lastOptionRef={lastEntryRef}
+          isSearchable={true}
+          setSearchInput={setSearchInput}
+          searchInput={searchInput}
         />
       </div>
     </div>

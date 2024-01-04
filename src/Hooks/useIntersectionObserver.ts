@@ -14,7 +14,6 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log('updataaa')
           // update page.
           setPage((prev) => prev + 1)
         }
@@ -24,8 +23,6 @@ const useIntersectionObserver = (isDataLoading: boolean) => {
     },
     [isDataLoading, hasMore]
   )
-
-  console.log({ hasMore, isDataLoading })
 
   return { lastEntryRef, setHasMore, setPage, page }
 }

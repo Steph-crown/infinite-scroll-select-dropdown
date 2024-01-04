@@ -9,5 +9,8 @@ export type SelectProps = {
   handleSelect: (option: SelectOptionProps) => void // function that is called when an option is selected.
   placeholder?: string
   isFetchingOptions?: boolean
+  isSearchable?: boolean
+  searchInput?: string
   lastOptionRef?: (node: Element | null) => void
+  setSearchInput?: React.Dispatch<React.SetStateAction<string>>
 }
